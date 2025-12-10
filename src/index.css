@@ -1,0 +1,89 @@
+@layer base, component;
+
+/* Satoshi Font Imports - Keeping these as they are robust */
+@font-face {
+  font-family: Satoshi;
+  src: url('https://proxy.extractcss.dev/https://cdn.prod.website-files.com/67d2e97c49802cd631d95ff1/685cc6cd0a70865359d512bf_Satoshi-Light.otf') format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Satoshi;
+  src: url('https://proxy.extractcss.dev/https://cdn.prod.website-files.com/67d2e97c49802cd631d95ff1/685cc6cdfc11011f7412eb4e_Satoshi-Bold.otf') format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Satoshi;
+  src: url('https://proxy.extractcss.dev/https://cdn.prod.website-files.com/67d2e97c49802cd631d95ff1/685cc6cd8db88cc42b0fe42e_Satoshi-Medium.otf') format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Satoshi;
+  src: url('https://proxy.extractcss.dev/https://cdn.prod.website-files.com/67d2e97c49802cd631d95ff1/685cc6cd4b3c87d00dedae18_Satoshi-Regular.otf') format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Satoshi;
+  src: url('https://proxy.extractcss.dev/https://cdn.prod.website-files.com/67d2e97c49802cd631d95ff1/685cc6cd0299a74c24975094_Satoshi-Black.otf') format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Satoshi', 'Inter', system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: #fff;
+  background-color: #05050A;
+  /* Deep cyber black */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #05050A;
+  overflow: hidden;
+  /* Prevent default scrolling, handled by snap container */
+}
+
+/* Custom Utilities for Neon Glows */
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 20px rgba(139, 92, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.3);
+  }
+
+  .box-glow {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+  }
+}
+
+/* Hide Scrollbar but allow scroll */
+.snap-container {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+}
+
+.snap-container::-webkit-scrollbar {
+  display: none;
+}
