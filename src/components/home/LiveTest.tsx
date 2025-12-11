@@ -121,7 +121,7 @@ export function LiveTest() {
             id="test"
             className="w-full h-screen bg-gradient-to-br from-slate-900 via-black to-slate-900 flex flex-col items-center justify-center relative snap-start border-t border-white/5 overflow-hidden py-12"
         >
-            <style jsx>{`
+            <style>{`
                 .invisible-scrollbar {
                     scrollbar-width: none;
                     -ms-overflow-style: none;
