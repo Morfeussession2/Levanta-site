@@ -3,52 +3,50 @@ import { Check } from 'lucide-react';
 
 const plans = [
     {
-        name: "Starter",
-        price: "R$ 99",
+        name: "Básico",
+        price: "R$ 29,90",
         period: "/mês",
         features: [
-            "1 Website",
-            "10GB Storage",
-            "Basic Analytics",
-            "Email Support",
-            "SSL Certificate"
+            "Edição de Conteúdo",
+            "Por 29,90 R$ + Análise de Dados"
         ],
         highlight: false,
         color: "from-blue-600 to-cyan-600"
     },
     {
-        name: "Professional",
-        price: "R$ 299",
+        name: "Ecommerce",
+        price: "R$ 59,90",
         period: "/mês",
         features: [
-            "5 Websites",
-            "50GB Storage",
-            "Advanced Analytics",
-            "Priority Support",
-            "SSL Certificate",
-            "Custom Domain",
-            "SEO Tools"
-        ],
-        highlight: true,
-        color: "from-purple-600 to-pink-600"
-    },
-    {
-        name: "Enterprise",
-        price: "R$ 599",
-        period: "/mês",
-        features: [
-            "Unlimited Websites",
-            "200GB Storage",
-            "Real-time Analytics",
-            "24/7 Support",
-            "SSL Certificate",
-            "Custom Domain",
-            "Advanced SEO",
-            "API Access",
-            "White Label"
+            "Edição de Conteúdo",
+            "Criação de Produtos",
+            "Por 29,90 R$ + Análise de Dados"
         ],
         highlight: false,
-        color: "from-indigo-600 to-purple-600"
+        color: "from-orange-600 to-orange-500"
+    },
+    {
+        name: "Blog",
+        price: "R$ 49,90",
+        period: "/mês",
+        features: [
+            "Edição de Conteúdo",
+            "Criação de Conteúdo",
+            "Por 29,90 R$ + Análise de Dados"
+        ],
+        highlight: true,
+        color: "from-green-600 to-green-500"
+    },
+    {
+        name: "Full",
+        price: "R$ 89,90",
+        period: "/mês",
+        features: [
+            "Todos os Recursos",
+            "Suporte Premium"
+        ],
+        highlight: false,
+        color: "from-purple-600 to-purple-500"
     }
 ];
 
@@ -65,11 +63,13 @@ export function FuturePricing() {
                     transition={{ duration: 0.8 }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-5xl md:text-7xl font-bold text-white mb-4">Planos</h2>
+                    <h2 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-pink-500 mb-4">
+                        Planos
+                    </h2>
                     <p className="text-gray-400 text-lg">Escolha o plano perfeito para sua evolução digital</p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                     {plans.map((plan, i) => (
                         <motion.div
                             key={i}
@@ -82,12 +82,12 @@ export function FuturePricing() {
 
                             <div className={`relative p-8 rounded-2xl border transition-all duration-300 h-full flex flex-col
                                 ${plan.highlight
-                                    ? 'bg-white/10 border-purple-500/50 shadow-[0_0_30px_rgba(168,85,247,0.3)]'
+                                    ? 'bg-white/10 border-green-500/50 shadow-[0_0_30px_rgba(34,197,94,0.3)]'
                                     : 'bg-white/5 border-white/10 hover:border-white/20'
                                 }
                             `}>
                                 {plan.highlight && (
-                                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-xs font-bold uppercase">
+                                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-green-600 to-green-500 rounded-full text-xs font-bold uppercase">
                                         Popular
                                     </div>
                                 )}
@@ -109,7 +109,7 @@ export function FuturePricing() {
 
                                 <button className={`w-full py-4 rounded-lg font-bold uppercase tracking-wider transition-all duration-300
                                     ${plan.highlight
-                                        ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-[0_0_30px_rgba(168,85,247,0.5)]'
+                                        ? 'bg-gradient-to-r from-green-600 to-green-500 text-white hover:shadow-[0_0_30px_rgba(34,197,94,0.5)]'
                                         : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
                                     }
                                 `}>
