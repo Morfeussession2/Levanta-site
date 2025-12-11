@@ -125,7 +125,7 @@ export function AdaptiveSection() {
             id="adapt"
             className="w-full h-screen bg-[#05050A] relative snap-start border-t border-white/5 overflow-hidden"
         >
-            <style jsx>{`
+            <style>{`
                 .invisible-scrollbar {
                     scrollbar-width: none;
                     -ms-overflow-style: none;

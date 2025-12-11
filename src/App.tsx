@@ -2,11 +2,13 @@
 import { FloatingDock } from './components/layout/FloatingDock';
 import { FutureHero } from './components/home/FutureHero';
 import { AdaptiveSection } from './components/home/AdaptiveSection';
+import { AboutLevanta } from './components/home/AboutLevanta';
 import { LiveTest } from './components/home/LiveTest';
 import { FuturePricing } from './components/home/FuturePricing';
 import { FutureContact } from './components/home/FutureContact';
 import { FutureCTA } from './components/home/FutureCTA';
 import { HeroProvider } from './contexts/HeroContext';
+import { LevantaPerks } from './components/home/LevantaPerks';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <main>
           <FutureHero />
           <AdaptiveSection />
+          <AboutLevanta />
+          <LevantaPerks />
           <LiveTest />
           <FuturePricing />
           <FutureContact />
