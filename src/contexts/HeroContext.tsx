@@ -16,8 +16,8 @@ const HeroContext = createContext<HeroContextType | undefined>(undefined);
 
 export function HeroProvider({ children }: { children: ReactNode }) {
     const [heroContent, setHeroContent] = useState<HeroContent>({
-        subtitle: "The adaptive platform that evolves with you.",
-        description: "Change your reality in real-time."
+        subtitle: "Tecnologia que transforma negócios.",
+        description: "Administre sua empresa de forma mais eficiente com a plataforma que você precisa."
     });
     const [triggerUpdate, setTriggerUpdate] = useState(false);
 

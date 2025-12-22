@@ -9,6 +9,7 @@ import { FutureContact } from './components/home/FutureContact';
 import { FutureCTA } from './components/home/FutureCTA';
 import { HeroProvider } from './contexts/HeroContext';
 import { LevantaPerks } from './components/home/LevantaPerks';
+import { TrustedBy } from './components/home/TrustedBy';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <AboutLevanta />
           <LevantaPerks />
           <LiveTest />
+          <TrustedBy />
           <FuturePricing />
           <FutureContact />
           <FutureCTA />

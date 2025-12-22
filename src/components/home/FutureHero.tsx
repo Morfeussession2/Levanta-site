@@ -75,9 +75,9 @@ export function FutureHero() {
                     transition={{ duration: 1 }}
                     className="mb-6"
                 >
-                    <span className="inline-block py-1 px-4 rounded-full border border-purple-500/50 bg-purple-500/10 text-purple-300 text-sm tracking-widest font-mono uppercase">
-                        System Online v2.0
-                    </span>
+                    {/* <span className="inline-block py-1 px-4 rounded-full border border-purple-500/50 bg-purple-500/10 text-purple-300 text-sm tracking-widest font-mono uppercase">
+                        Levanta v2
+                    </span> */}
                 </motion.div>
 
                 <motion.div
