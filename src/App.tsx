@@ -10,6 +10,7 @@ import { FutureCTA } from './components/home/FutureCTA';
 import { HeroProvider } from './contexts/HeroContext';
 import { LevantaPerks } from './components/home/LevantaPerks';
 import { TrustedBy } from './components/home/TrustedBy';
+import { PlatformIntro } from './components/home/PlatformIntro';
 
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
         <main>
           <FutureHero />
           <AdaptiveSection />
-          <AboutLevanta />
           <LevantaPerks />
+          <PlatformIntro />
+          <AboutLevanta />
           <LiveTest />
           <TrustedBy />
           <FuturePricing />
