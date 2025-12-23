@@ -11,6 +11,7 @@ import { HeroProvider } from './contexts/HeroContext';
 import { LevantaPerks } from './components/home/LevantaPerks';
 import { TrustedBy } from './components/home/TrustedBy';
 import { PlatformIntro } from './components/home/PlatformIntro';
+import { Intermed } from './components/home/Intermed';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <AdaptiveSection />
           <LevantaPerks />
           <PlatformIntro />
+          <Intermed />
           <AboutLevanta />
           <LiveTest />
           <TrustedBy />

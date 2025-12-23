@@ -39,6 +39,8 @@ export default function TiltedCard({
     displayOverlayContent = false
 }: TiltedCardProps) {
     const ref = useRef<HTMLElement>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const startTimeRef = useRef<number>(Date.now());
     const x = useMotionValue(0);
     const y = useMotionValue(0);
     const rotateX = useSpring(useMotionValue(0), springValues);
@@ -52,6 +54,34 @@ export default function TiltedCard({
     });
 
     const [lastY, setLastY] = useState(0);
+
+    const isVideo = typeof imageSrc === 'string' && (
+        imageSrc.endsWith('.mp4') ||
+        imageSrc.endsWith('.webm') ||
+        imageSrc.endsWith('.ogg')
+    );
+
+    function handleVideoEnded() {
+        if (!videoRef.current) return;
+
+        const elapsedTime = Date.now() - startTimeRef.current;
+        const minDuration = 10000; // 10 seconds in ms
+
+        if (elapsedTime < minDuration) {
+            const delay = minDuration - elapsedTime;
+            setTimeout(() => {
+                if (videoRef.current) {
+                    videoRef.current.currentTime = 0;
+                    startTimeRef.current = Date.now();
+                    videoRef.current.play();
+                }
+            }, delay);
+        } else {
+            videoRef.current.currentTime = 0;
+            startTimeRef.current = Date.now();
+            videoRef.current.play();
+        }
+    }
 
     function handleMouse(e: React.MouseEvent<HTMLElement>) {
         if (!ref.current) return;
@@ -115,15 +145,31 @@ export default function TiltedCard({
                     scale
                 }}
             >
-                <motion.img
-                    src={imageSrc}
-                    alt={altText}
-                    className="absolute top-0 left-0 object-cover rounded-[20px] will-change-transform [transform:translateZ(0)] border border-white/10 shadow-2xl"
-                    style={{
-                        width: imageWidth,
-                        height: imageHeight
-                    }}
-                />
+                {isVideo ? (
+                    <motion.video
+                        ref={videoRef}
+                        src={imageSrc}
+                        autoPlay
+                        muted
+                        playsInline
+                        onEnded={handleVideoEnded}
+                        className="absolute top-0 left-0 object-cover rounded-[20px] will-change-transform [transform:translateZ(0)] border border-white/10 shadow-2xl"
+                        style={{
+                            width: imageWidth,
+                            height: imageHeight
+                        }}
+                    />
+                ) : (
+                    <motion.img
+                        src={imageSrc}
+                        alt={altText}
+                        className="absolute top-0 left-0 object-cover rounded-[20px] will-change-transform [transform:translateZ(0)] border border-white/10 shadow-2xl"
+                        style={{
+                            width: imageWidth,
+                            height: imageHeight
+                        }}
+                    />
+                )}
 
                 {displayOverlayContent && overlayContent && (
                     <motion.div className="absolute top-0 left-0 z-[2] will-change-transform [transform:translateZ(30px)] pointer-events-none">

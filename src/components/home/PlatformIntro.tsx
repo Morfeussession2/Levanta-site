@@ -3,7 +3,7 @@ import TiltedCard from '../ui/TiltedCard';
 
 export function PlatformIntro() {
     return (
-        <section className="w-full h-screen bg-[#05050A] flex flex-col items-center justify-center relative overflow-hidden snap-start border-t border-white/5">
+        <section className="w-full h-screen bg-[#05050A] flex flex-col items-center justify-center relative snap-start border-t border-white/5">
             {/* Background Effects */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-purple-600/10 blur-[160px] rounded-full animate-pulse" />
@@ -22,12 +22,12 @@ export function PlatformIntro() {
                         >
 
                             <TiltedCard
-                                imageSrc="/apresentaLev.jpg"
+                                imageSrc="/apresentaLev.mp4"
                                 altText="Plataforma Levanta"
                                 captionText="Levanta Platform View"
                                 containerHeight="100%"
                                 containerWidth="100%"
-                                imageHeight="85vh"
+                                imageHeight="69vh"
                                 imageWidth="1200px"
                                 rotateAmplitude={8}
                                 scaleOnHover={1.1}
@@ -67,10 +67,6 @@ export function PlatformIntro() {
                         transition={{ delay: 1, duration: 1 }}
                         className="mt-4 flex flex-col items-center"
                     >
-                        <div className="w-px h-24 bg-gradient-to-b from-purple-500 to-transparent" />
-                        <span className="mt-4 text-xs font-mono uppercase tracking-[0.3em] text-gray-400 bg-black/20 backdrop-blur-sm px-2 py-1 rounded">
-                            Role para explorar
-                        </span>
                     </motion.div>
                 </div>
             </div>
