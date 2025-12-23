@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useMemo, useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 type Service = {
     title: string;
@@ -10,14 +10,12 @@ type Service = {
 const services: Service[] = [
     {
         title: "Desenvolvimento Web",
-        description:
-            "Sites e sistemas web modernos, responsivos e otimizados para performance.",
+        description: "Sites e sistemas web modernos, responsivos e otimizados para performance.",
         items: ["React/Vue", "E-commerce", "CRM", "ERP", "SEO Otimizado", "CI/CD"],
     },
     {
         title: "Aplicativos Mobile",
-        description:
-            "Apps nativos e híbridos para iOS e Android com experiência excepcional.",
+        description: "Apps nativos e híbridos para iOS e Android com experiência excepcional.",
         items: ["React Native", "Flutter", "UI/UX Design", "CI/CD"],
     },
     {
@@ -30,13 +28,7 @@ const services: Service[] = [
         title: "Manutenção",
         description:
             "Melhorias, testes e continuidade de desenvolvimento de sistemas e projetos já existentes.",
-        items: [
-            "Arquitetura",
-            "Code Review",
-            "Desenvolvimento",
-            "Roadmap",
-            "Testes Automatizados",
-        ],
+        items: ["Arquitetura", "Code Review", "Desenvolvimento", "Roadmap", "Testes Automatizados"],
     },
 ];
 
@@ -46,34 +38,48 @@ type CardProps = {
     progress: any;
     range: number[];
     targetScale: number;
+    lowPower: boolean;
 };
 
-function ServiceCard({ service, index, progress, range, targetScale }: CardProps) {
-    const scale = useTransform(progress, range, [1, targetScale]);
+function ServiceCard({ service, index, progress, range, targetScale, lowPower }: CardProps) {
+    // Quando lowPower=true, "congela" as transforms (sem scrub por scroll).
+    const scale = useTransform(progress, range, lowPower ? [1, 1] : [1, targetScale]);
     const opacity = useTransform(
         progress,
-        [range[0] - 0.1, range[0], range[1] - 0.1, range[0]],
-        [0.3, 1, 1, 0.9]
+        [range[0] - 0.1, range[0], range[1] - 0.1, range[1]],
+        lowPower ? [1, 1, 1, 1] : [0.6, 1, 1, 0.9]
     );
+
+    const cardClassName = useMemo(() => {
+        // Versão leve: sem backdrop-blur, sombras menores, hover mais simples.
+        if (lowPower) {
+            return [
+                "group relative w-full max-w-lg h-[430px] md:h-[480px] overflow-hidden rounded-3xl",
+                "border border-white/10 bg-slate-900/85 p-6 md:p-8 shadow-xl",
+                "transition-colors duration-200 hover:border-purple-400/60",
+            ].join(" ");
+        }
+
+        // Versão normal (ainda otimizada vs original): sem backdrop blur forte e sem mega sombras.
+        return [
+            "group relative w-full max-w-lg h-[450px] md:h-[500px] overflow-hidden rounded-3xl",
+            "border border-white/15 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 md:p-8",
+            "shadow-2xl transition-all duration-300 hover:border-purple-400/70",
+        ].join(" ");
+    }, [lowPower]);
 
     return (
         <div
             className="h-[64vh] flex items-center justify-center sticky"
-            style={{
-                top: `calc(10% + ${index * 20}px)`,
-            }}
+            style={{ top: `calc(10% + ${index * 20}px)` }}
         >
-            <motion.div
-                style={{
-                    scale,
-                    opacity,
-                }}
-                className="group relative w-full max-w-lg h-[450px] md:h-[500px] overflow-hidden rounded-3xl border border-white/20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 backdrop-blur-xl p-6 md:p-8 shadow-[0_0_60px_rgba(0,0,0,0.9)] hover:border-purple-400/80 hover:shadow-[0_0_80px_rgba(168,85,247,0.4)] transition-all duration-500"
-            >
-                <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+            <motion.div style={{ scale, opacity }} className={cardClassName}>
+                {/* Linha superior (barata) */}
+                {!lowPower && (
+                    <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-60" />
+                )}
 
                 <div className="flex items-start gap-4">
-
                     <div className="flex-1">
                         <h3 className="text-xl md:text-2xl font-bold text-white tracking-wide">
                             {service.title}
@@ -87,27 +93,19 @@ function ServiceCard({ service, index, progress, range, targetScale }: CardProps
                 <ul className="mt-6 space-y-3 text-base md:text-lg text-gray-200">
                     {service.items.map((item) => (
                         <li key={item} className="flex items-center gap-3 text-gray-200">
-                            <span className="h-2 w-2 rounded-full bg-gradient-to-r from-purple-400 to-blue-400 animate-pulse flex-shrink-0" />
-                            <span className="group-hover:text-white transition-colors duration-300">
+                            {/* Removido animate-pulse (custinho constante). */}
+                            <span className="h-2 w-2 rounded-full bg-purple-400 flex-shrink-0" />
+                            <span className={!lowPower ? "group-hover:text-white transition-colors" : ""}>
                                 {item}
                             </span>
                         </li>
                     ))}
                 </ul>
 
-                <motion.div
-                    className="pointer-events-none absolute inset-0"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <div className="absolute -inset-10 bg-gradient-to-tr from-purple-500/20 via-transparent to-blue-500/20 blur-3xl" />
-                </motion.div>
-
-                <motion.div
-                    className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/30 rounded-3xl"
-                    style={{ opacity }}
-                />
+                {/* Removidos overlays com blur e hover glow (caros). */}
+                {!lowPower && (
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/25 rounded-3xl opacity-70" />
+                )}
             </motion.div>
         </div>
     );
@@ -115,6 +113,10 @@ function ServiceCard({ service, index, progress, range, targetScale }: CardProps
 
 export function AdaptiveSection() {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+    // Se o usuário/OS pedir menos movimento, ativamos modo leve automaticamente.
+    const reducedMotion = useReducedMotion();
+    const lowPower = reducedMotion; // pode expandir depois p/ um toggle manual também. [web:21][web:27]
 
     const { scrollYProgress } = useScroll({
         container: scrollContainerRef,
@@ -126,27 +128,44 @@ export function AdaptiveSection() {
             className="w-full h-screen bg-[#05050A] relative snap-start border-t border-white/5 overflow-hidden"
         >
             <style>{`
-                .invisible-scrollbar {
-                    scrollbar-width: none;
-                    -ms-overflow-style: none;
-                }
-                .invisible-scrollbar::-webkit-scrollbar {
-                    display: none;
-                }
-            `}</style>
+        .invisible-scrollbar {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .invisible-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .reduce-motion * {
+            scroll-behavior: auto !important;
+          }
+        }
+      `}</style>
 
-            {/* Fundos fixos (absolute dentro da section) */}
+            {/* Fundos fixos (otimizados) */}
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none z-0" />
-            <div className="absolute -top-16 -left-16 w-64 h-64 bg-purple-500/40 blur-3xl rounded-full opacity-60 pointer-events-none z-0" />
-            <div className="absolute -bottom-24 -right-10 w-64 h-64 bg-blue-500/30 blur-3xl rounded-full opacity-60 pointer-events-none z-0" />
+
+            {/* Orbs: sem blur no modo leve */}
+            {!lowPower ? (
+                <>
+                    <div className="absolute -top-16 -left-16 w-64 h-64 bg-purple-500/30 blur-3xl rounded-full opacity-60 pointer-events-none z-0" />
+                    <div className="absolute -bottom-24 -right-10 w-64 h-64 bg-blue-500/25 blur-3xl rounded-full opacity-60 pointer-events-none z-0" />
+                </>
+            ) : (
+                <>
+                    <div className="absolute -top-24 -left-24 w-80 h-80 bg-purple-500/12 rounded-full opacity-60 pointer-events-none z-0" />
+                    <div className="absolute -bottom-28 -right-20 w-80 h-80 bg-blue-500/10 rounded-full opacity-60 pointer-events-none z-0" />
+                </>
+            )}
 
             {/* Container scrollável */}
             <div
                 ref={scrollContainerRef}
-                className="invisible-scrollbar absolute inset-0 overflow-y-auto overflow-x-hidden"
+                className={`invisible-scrollbar absolute inset-0 overflow-y-auto overflow-x-hidden ${lowPower ? "reduce-motion" : ""
+                    }`}
             >
                 <div className="flex flex-col md:flex-row">
-                    {/* Lado Esquerdo: Stack de Cards (scrolla) */}
+                    {/* Lado Esquerdo: Cards */}
                     <div className="w-full md:w-1/2 relative">
                         <div className="relative z-10 py-10 px-4">
                             {services.map((service, index) => {
@@ -161,24 +180,25 @@ export function AdaptiveSection() {
                                         progress={scrollYProgress}
                                         range={range}
                                         targetScale={targetScale}
+                                        lowPower={lowPower}
                                     />
                                 );
                             })}
                         </div>
                     </div>
 
-                    {/* Espaçador para o lado direito fixo */}
+                    {/* Espaçador do lado direito */}
                     <div className="w-full md:w-1/2" style={{ height: `${services.length * 70}vh` }} />
                 </div>
             </div>
 
-            {/* Lado Direito: Conteúdo de Texto (absolute dentro da section) */}
+            {/* Lado Direito: Texto fixo (reduzido no modo leve) */}
             <div className="absolute top-0 right-0 w-full md:w-1/2 h-full flex items-center justify-center p-8 md:p-20 z-20 pointer-events-none">
                 <div className="max-w-xl pointer-events-auto">
                     <motion.h2
-                        initial={{ x: 100, opacity: 0 }}
+                        initial={lowPower ? { opacity: 1, x: 0 } : { x: 60, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 0.8 }}
+                        transition={lowPower ? { duration: 0 } : { duration: 0.5 }}
                         viewport={{ once: true }}
                         className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-pink-500 mb-6 leading-tight"
                     >
@@ -186,27 +206,26 @@ export function AdaptiveSection() {
                     </motion.h2>
 
                     <motion.p
-                        initial={{ x: 100, opacity: 0 }}
+                        initial={lowPower ? { opacity: 1, x: 0 } : { x: 60, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 0.8, delay: 0.15 }}
+                        transition={lowPower ? { duration: 0 } : { duration: 0.5, delay: 0.08 }}
                         viewport={{ once: true }}
                         className="text-lg md:text-xl text-gray-300 leading-relaxed"
                     >
-                        Oferecemos soluções completas em tecnologia para empresas que buscam
-                        inovação e crescimento sustentável.
+                        Oferecemos soluções completas em tecnologia para empresas que buscam inovação e
+                        crescimento sustentável.
                     </motion.p>
 
                     <motion.p
-                        initial={{ x: 100, opacity: 0 }}
+                        initial={lowPower ? { opacity: 1, x: 0 } : { x: 60, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 0.8, delay: 0.3 }}
+                        transition={lowPower ? { duration: 0 } : { duration: 0.5, delay: 0.16 }}
                         viewport={{ once: true }}
                         className="mt-4 text-sm md:text-base text-gray-400 max-w-lg"
                     >
-                        Da criação de interfaces modernas ao desenvolvimento contínuo e
-                        manutenção de sistemas, a Levanta cuida de toda a jornada digital
-                        da sua empresa com foco em performance, experiência do usuário e
-                        escalabilidade.
+                        Da criação de interfaces modernas ao desenvolvimento contínuo e manutenção de sistemas,
+                        a Levanta cuida de toda a jornada digital da sua empresa com foco em performance,
+                        experiência do usuário e escalabilidade.
                     </motion.p>
                 </div>
             </div>

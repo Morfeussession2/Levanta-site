@@ -55,7 +55,7 @@ export function LevantaPerks() {
     return (
         <section
             id="perks"
-            className="w-full h-screen relative snap-start border-t border-white/5 overflow-hidden"
+            className="w-full h-screen relative snap-start border-t border-white/5 overflow-hidden snap-proximity scroll-smooth"
         >
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none z-0" />
 

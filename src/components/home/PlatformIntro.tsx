@@ -3,7 +3,7 @@ import TiltedCard from '../ui/TiltedCard';
 
 export function PlatformIntro() {
     return (
-        <section className="w-full h-screen bg-[#05050A] flex flex-col items-center justify-center relative snap-start border-t border-white/5">
+        <section className="snap-start snap-proximity scroll-smooth w-full h-screen bg-[#05050A] flex flex-col items-center justify-center relative snap-start border-t border-white/5">
             {/* Background Effects */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-purple-600/10 blur-[160px] rounded-full animate-pulse" />
