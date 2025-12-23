@@ -119,8 +119,17 @@ export function LiveTest() {
     return (
         <section
             id="test"
-            className="w-full h-screen bg-gradient-to-br from-slate-900 via-black to-slate-900 flex flex-col items-center justify-center relative snap-start border-t border-white/5 overflow-hidden py-12"
+            className="w-full h-screen bg-[#05050A] flex flex-col items-center justify-center relative snap-start border-t border-white/5 overflow-hidden py-12"
         >
+            {/* Background Effects */}
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none z-0" />
+
+            {/* Borrão azul - MAIS PARA CIMA */}
+            <div className="absolute -top-32 -right-20 w-[600px] h-[600px] bg-blue-600/10 blur-3xl rounded-full opacity-30 pointer-events-none z-0" />
+
+            {/* Borrão roxo - MAIS PARA BAIXO */}
+            <div className="absolute -bottom-48 -left-16 w-[550px] h-[550px] bg-purple-700/20 blur-3xl rounded-full opacity-40 pointer-events-none z-0" />
+
             <style>{`
                 .invisible-scrollbar {
                     scrollbar-width: none;

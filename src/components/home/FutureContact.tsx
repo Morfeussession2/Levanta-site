@@ -5,6 +5,9 @@ import { FireworksBackground } from '../ui/fireworks-background';
 export function FutureContact() {
     return (
         <section id="contact" className="w-full h-screen bg-[#05050A] flex items-center justify-center relative snap-start border-t border-white/5 overflow-hidden">
+            {/* Background Texture */}
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none z-[1]" />
+
             {/* Fireworks Background */}
             <FireworksBackground
                 population={3}

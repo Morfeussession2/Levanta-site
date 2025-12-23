@@ -52,9 +52,17 @@ const plans = [
 
 export function FuturePricing() {
     return (
-        <section id="pricing" className="w-full h-screen bg-black flex items-center justify-center relative snap-start border-t border-white/5 overflow-hidden">
-            {/* Background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-black to-black"></div>
+        <section id="pricing" className="w-full h-screen bg-[#05050A] flex items-center justify-center relative snap-start border-t border-white/5 overflow-hidden">
+            {/* Background Effects */}
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none z-0" />
+
+            {/* Borrão roxo */}
+            <div className="absolute -top-32 -left-20 w-[600px] h-[600px] bg-purple-600/20 blur-3xl rounded-full opacity-40 pointer-events-none z-0" />
+
+            {/* Borrão azul */}
+            <div className="absolute -bottom-48 -right-16 w-[550px] h-[550px] bg-blue-700/10 blur-3xl rounded-full opacity-30 pointer-events-none z-0" />
+
+            <div className="absolute inset-0 bg-gradient-to-b from-purple-900/5 via-black to-black opacity-50 z-0"></div>
 
             <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
                 <motion.div

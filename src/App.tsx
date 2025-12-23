@@ -27,8 +27,8 @@ function App() {
           <Intermed />
           <AboutLevanta />
           <LiveTest />
-          <TrustedBy />
           <FuturePricing />
+          <TrustedBy />
           <FutureContact />
         </main>
 

@@ -178,11 +178,17 @@ export function TrustedBy() {
     const displayCompanies = [...companies, ...companies, ...companies];
 
     return (
-        <section id="cases" className="w-full h-screen bg-black flex flex-col items-center justify-center relative overflow-hidden snap-start border-t border-white/5">
-            {/* Background elements */}
-            <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-purple-600/5 blur-[120px] rounded-full" />
-            </div>
+        <section id="cases" className="w-full h-screen bg-[#05050A] flex flex-col items-center justify-center relative overflow-hidden snap-start border-t border-white/5">
+            {/* Background effects */}
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none z-0" />
+
+            {/* Borrão azul - MAIS PARA CIMA */}
+            <div className="absolute -top-32 -left-20 w-[600px] h-[600px] bg-blue-600/10 blur-3xl rounded-full opacity-30 pointer-events-none z-0" />
+
+            {/* Borrão roxo - MAIS PARA BAIXO */}
+            <div className="absolute -bottom-48 -right-16 w-[550px] h-[550px] bg-purple-700/20 blur-3xl rounded-full opacity-40 pointer-events-none z-0" />
+
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-900/5 via-black to-black opacity-50 pointer-events-none" />
 
             <div className="max-w-7xl mx-auto px-6 relative z-10 mb-16 text-center w-full">
                 <motion.div
