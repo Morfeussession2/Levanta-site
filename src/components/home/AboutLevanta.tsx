@@ -50,7 +50,7 @@ export function AboutLevanta() {
                             viewport={{ once: true }}
                             className="mt-4 text-sm md:text-base text-gray-400 max-w-lg"
                         >
-                            Nossa interface foi desenvolvida para tornar complexo simples.
+                            Nossa interface foi desenvolvida para tornar o complexo, simples.
                             Gerencie conteúdo, acompanhe métricas e tome decisões estratégicas
                             tudo em um só lugar, sem complicação.
                         </motion.p>
