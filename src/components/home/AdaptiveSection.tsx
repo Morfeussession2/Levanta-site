@@ -124,7 +124,7 @@ export function AdaptiveSection() {
 
     return (
         <section
-            id="adapt"
+            id="servicos"
             className="w-full h-screen bg-[#05050A] relative snap-start border-t border-white/5 overflow-hidden"
         >
             <style>{`

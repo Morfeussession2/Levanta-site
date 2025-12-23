@@ -178,7 +178,7 @@ export function TrustedBy() {
     const displayCompanies = [...companies, ...companies, ...companies];
 
     return (
-        <section className="w-full h-screen bg-black flex flex-col items-center justify-center relative overflow-hidden snap-start border-t border-white/5">
+        <section id="cases" className="w-full h-screen bg-black flex flex-col items-center justify-center relative overflow-hidden snap-start border-t border-white/5">
             {/* Background elements */}
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-purple-600/5 blur-[120px] rounded-full" />

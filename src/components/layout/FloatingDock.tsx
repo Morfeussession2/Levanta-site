@@ -1,12 +1,16 @@
 import { motion } from 'framer-motion';
-import { Home, Zap, Layers, Cpu, MessageSquare } from 'lucide-react';
+import { Home, Zap, Cpu, Layout, Info, Terminal, Star, Tag, MessageSquare } from 'lucide-react';
 
 const navItems = [
     { name: 'Home', icon: Home, href: '#home' },
-    { name: 'Features', icon: Zap, href: '#features' },
-    { name: 'Adapt', icon: Layers, href: '#adapt' },
-    { name: 'Specs', icon: Cpu, href: '#specs' },
-    { name: 'Contact', icon: MessageSquare, href: '#contact' },
+    { name: 'Serviços', icon: Zap, href: '#servicos' },
+    { name: 'Diferenciais', icon: Cpu, href: '#perks' },
+    { name: 'Plataforma', icon: Layout, href: '#platform' },
+    { name: 'Sobre', icon: Info, href: '#about' },
+    { name: 'Teste', icon: Terminal, href: '#test' },
+    { name: 'Cases', icon: Star, href: '#cases' },
+    { name: 'Preços', icon: Tag, href: '#pricing' },
+    { name: 'Contato', icon: MessageSquare, href: '#contact' },
 ];
 
 export function FloatingDock() {

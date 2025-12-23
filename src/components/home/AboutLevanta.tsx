@@ -28,7 +28,14 @@ export function AboutLevanta() {
                             viewport={{ once: true }}
                             className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-pink-500 mb-6 leading-tight"
                         >
-                            Sobre a Levanta
+                            Sobre a
+                            <div className="relative">
+                                <img
+                                    className="w-40 md:w-40 "
+                                    src="/Eleva1_Prancheta 1.png"
+                                    alt="Eleva Logo"
+                                />
+                            </div>
                         </motion.h2>
 
 
