@@ -16,7 +16,7 @@ export function AboutLevanta() {
 
             {/* Container principal */}
             <div className="relative h-full w-full flex items-center">
-                <div className="w-full max-w-7xl mx-auto px-8 md:px-20 flex items-center justify-between gap-16 md:gap-20 lg:gap-32">
+                <div className="w-full max-w-7xl mx-auto pr-40 flex items-center ">
 
 
                     {/* Lado Esquerdo: Conteúdo de Texto */}
@@ -65,7 +65,7 @@ export function AboutLevanta() {
 
 
                     {/* Lado Direito: CardSwap com controle de posição */}
-                    <div className="hidden md:flex w-1/2 h-full relative left-20">
+                    <div className="hidden md:flex w-1/2 h-full relative">
                         <DeviceMockupCarousel />
                     </div>
                 </div>

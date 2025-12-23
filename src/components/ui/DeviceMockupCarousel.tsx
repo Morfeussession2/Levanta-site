@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
 import { ChevronUp, ChevronDown, Pause, Play } from "lucide-react";
 
 interface DeviceSlide {
     id: string;
     title: string;
     description: string;
-    image: string;
+    video: string;
 }
 
 const slides: DeviceSlide[] = [
@@ -13,25 +14,25 @@ const slides: DeviceSlide[] = [
         id: "1",
         title: "Dashboard Personalizada",
         description: "Personalize do seu jeito para otimizar seus processos.",
-        image: "",
+        video: "/Dashboard.mp4",
     },
     {
         id: "2",
         title: "Métricas detalhadas",
         description: "Veja as métricas de vendas e clientes em tempo real.",
-        image: "",
+        video: "/metricas.mp4",
     },
     {
         id: "3",
         title: "Edição de Conteúdo",
         description: "Edite o seu conteúdo do jeito que quiser com poucos cliques.",
-        image: "",
+        video: "/conteudo.mp4",
     },
     {
         id: "4",
         title: "Categorização de Produtos",
         description: "Categorize seus produtos de forma intuitiva e eficiente.",
-        image: "",
+        video: "/categorias.mp4",
     },
 ];
 
@@ -45,6 +46,13 @@ export function DeviceMockupCarousel() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
     const [progress, setProgress] = useState(0);
+
+    const [aspectRatio, setAspectRatio] = useState(16 / 9);
+
+    const handleLoadedMetadata = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+        const { videoWidth, videoHeight } = e.currentTarget;
+        setAspectRatio(videoWidth / videoHeight);
+    };
 
     const goToSlide = useCallback((index: number) => {
         setCurrentIndex(index);
@@ -125,34 +133,43 @@ export function DeviceMockupCarousel() {
                     <div className="absolute top-2 md:top-3 left-1/2 -translate-x-1/2 w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-slate-700/80" />
 
                     {/* Screen / Image Area */}
-                    <div className="relative w-[260px] h-[300px] md:w-[380px] md:h-[440px] lg:w-[480px] lg:h-[560px] rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden bg-slate-950">
+                    <motion.div
+                        layout
+                        animate={{ aspectRatio }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        className="relative w-[280px] md:w-[450px] lg:w-[800px] max-w-[80vw] max-h-[70vh] rounded-[1.2rem] md:rounded-[1.5rem] overflow-hidden bg-slate-950"
+                    >
                         {/* Content with transition */}
                         <div className="relative w-full h-full">
                             {slides.map((slide, index) => (
-                                <div
+                                <motion.div
                                     key={slide.id}
+                                    layout
                                     className={cn(
-                                        "absolute inset-0 transition-all duration-700 ease-out",
+                                        "absolute inset-0 transition-all duration-700 ease-out flex items-center justify-center",
                                         index === currentIndex
                                             ? "opacity-100 scale-100"
                                             : "opacity-0 scale-95"
                                     )}
                                 >
-                                    <img
-                                        src={slide.image}
-                                        alt={slide.title}
-                                        className="w-full h-full object-cover"
-                                    />
+                                    {index === currentIndex && (
+                                        <video
+                                            src={slide.video}
+                                            autoPlay
+                                            loop
+                                            muted
+                                            playsInline
+                                            onLoadedMetadata={handleLoadedMetadata}
+                                            className="w-full h-full object-contain"
+                                        />
+                                    )}
 
                                     {/* Overlay gradient */}
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
-
-                                    {/* UI Elements overlay to simulate app interface */}
-
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Title and Description - Inside frame at bottom (Polaroid style) */}
                     <div className="absolute bottom-0 left-0 right-0 px-4 md:px-6 pb-3 md:pb-4 pt-2">
@@ -209,6 +226,6 @@ export function DeviceMockupCarousel() {
                     <ChevronDown className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
             </div>
-        </div>
+        </div >
     );
 }
