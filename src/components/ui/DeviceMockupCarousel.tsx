@@ -11,27 +11,27 @@ interface DeviceSlide {
 const slides: DeviceSlide[] = [
     {
         id: "1",
-        title: "Design Personalizado",
-        description: "Interfaces únicas que refletem a identidade da sua marca, sem templates prontos.",
+        title: "Dashboard Personalizada",
+        description: "Personalize do seu jeito para otimizar seus processos.",
         image: "",
     },
     {
         id: "2",
-        title: "Performance Otimizada",
-        description: "Sites ultrarrápidos com as tecnologias mais modernas do mercado.",
-        image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop",
+        title: "Métricas detalhadas",
+        description: "Veja as métricas de vendas e clientes em tempo real.",
+        image: "",
     },
     {
         id: "3",
-        title: "Código Limpo",
-        description: "Desenvolvimento do zero, sem plugins desnecessários ou código duplicado.",
-        image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop",
+        title: "Edição de Conteúdo",
+        description: "Edite o seu conteúdo do jeito que quiser com poucos cliques.",
+        image: "",
     },
     {
         id: "4",
-        title: "Deploy Instantâneo",
-        description: "Seu site no ar em minutos com infraestrutura escalável e segura.",
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+        title: "Categorização de Produtos",
+        description: "Categorize seus produtos de forma intuitiva e eficiente.",
+        image: "",
     },
 ];
 
