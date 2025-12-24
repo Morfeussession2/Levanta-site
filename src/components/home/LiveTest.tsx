@@ -206,7 +206,7 @@ export function LiveTest() {
                 <div className="relative flex flex-1 gap-6 overflow-hidden">
                     {/* Sidebar Navigation */}
                     <div className="group/sidebar absolute bottom-0 left-0 top-0 z-20 flex w-12 md:w-16 hover:w-64 md:hover:w-72 flex-col rounded-xl border border-white/10 bg-slate-900/90 backdrop-blur-xl shadow-2xl transition-all duration-300 overflow-hidden">
-                        <div className="flex items-center gap-3 border-b border-white/10 bg-slate-800/50 p-4">
+                        <div className="flex items-center justify-center md:justify-start gap-3 border-b border-white/10 bg-slate-800/50 p-3 md:p-4">
                             <Menu className="h-4 w-4 md:h-5 md:w-5 text-slate-400 shrink-0" />
                             <span className="text-sm font-semibold text-slate-200 opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 whitespace-nowrap">
                                 Navegação
@@ -218,7 +218,7 @@ export function LiveTest() {
                             {sections.map((section, idx) => (
                                 <div
                                     key={section.id}
-                                    className={`group/item relative flex items-center justify-content: space-evenly; md:justify-start gap-3 rounded-lg p-2 md:p-2 cursor-pointer transition-colors ${section.active
+                                    className={`group/item relative flex items-center justify-center md:justify-start gap-3 rounded-lg p-1.5 md:p-2 cursor-pointer transition-colors ${section.active
                                         ? "bg-blue-500/20 text-blue-400"
                                         : "text-slate-400 hover:bg-white/5"
                                         } ${idx > 0 ? "mt-1" : ""}`}

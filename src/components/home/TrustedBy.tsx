@@ -173,6 +173,25 @@ const companies: Company[] = [
 export function TrustedBy() {
     const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
     const [isHovered, setIsHovered] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    useEffect(() => {
+        if (selectedCompany) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [selectedCompany]);
 
     // Triple the array to ensure smooth infinite loop
     const displayCompanies = [...companies, ...companies, ...companies];
@@ -213,11 +232,14 @@ export function TrustedBy() {
                     onMouseLeave={() => setIsHovered(false)}
                 >
                     {/* Gradient Masks */}
-                    <div className="absolute inset-y-0 left-0 w-20 md:w-40 bg-gradient-to-r from-black to-transparent z-20" />
-                    <div className="absolute inset-y-0 right-0 w-20 md:w-40 bg-gradient-to-l from-black to-transparent z-20" />
+                    <div className="absolute inset-y-0 left-0 w-20 md:w-40 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
+                    <div className="absolute inset-y-0 right-0 w-20 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
 
                     <motion.div
-                        className="flex gap-6 md:gap-12 whitespace-nowrap py-6 md:py-10"
+                        className="flex gap-6 md:gap-12 whitespace-nowrap py-6 md:py-10 pointer-events-auto"
+                        drag={isMobile ? "x" : false}
+                        dragConstraints={{ left: -2000, right: 0 }}
+                        dragElastic={0.05}
                         animate={{
                             x: [0, "-33.33%"],
                         }}
@@ -225,7 +247,9 @@ export function TrustedBy() {
                             x: {
                                 repeat: Infinity,
                                 repeatType: "loop",
-                                duration: isHovered ? 60 : 25,
+                                duration: isHovered
+                                    ? (isMobile ? 30 : 50)
+                                    : (isMobile ? 10 : 20),
                                 ease: "linear",
                             },
                         }}
@@ -268,40 +292,40 @@ export function TrustedBy() {
                             initial={{ scale: 0.9, opacity: 0, y: 20 }}
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                            className="relative w-full max-w-[1120px] bg-[#0A0A0F] border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+                            className="relative w-full max-w-[1120px] max-h-[90vh] md:max-h-[85vh] bg-[#0A0A0F] border border-white/10 rounded-3xl overflow-hidden shadow-2xl overflow-y-auto invisible-scrollbar"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <button
                                 onClick={() => setSelectedCompany(null)}
-                                className="absolute top-6 right-6 p-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors z-30"
+                                className="absolute top-4 right-4 md:top-6 md:right-6 p-2 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors z-30"
                             >
                                 <X size={20} />
                             </button>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 h-full min-h-[500px]">
-                                {/* Info Side */}
-                                <div className="p-8 md:p-12 flex flex-col justify-between">
+                            <div className="grid grid-cols-1 md:grid-cols-2 h-full min-h-0 md:min-h-[500px]">
+                                {/* Info Side - Order 2 on mobile to show images first, or keep 1? User usually prefers text first. Sticking to text first. */}
+                                <div className="p-6 md:p-12 flex flex-col justify-between order-2 md:order-1">
                                     <div>
-                                        <div className={`inline-block px-3 py-1 rounded-full bg-gradient-to-r ${selectedCompany.color} text-black text-xs font-bold uppercase mb-6 tracking-widest`}>
+                                        <div className={`inline-block px-3 py-1 rounded-full bg-gradient-to-r ${selectedCompany.color} text-[10px] md:text-xs font-bold uppercase mb-4 md:mb-6 tracking-widest`}>
                                             {selectedCompany.service}
                                         </div>
-                                        <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                                        <h3 className="text-2xl md:text-5xl font-bold text-white mb-4 md:mb-6">
                                             {selectedCompany.name}
                                         </h3>
-                                        <p className="text-gray-400 text-lg md:text-xl leading-relaxed mb-8">
+                                        <p className="text-gray-400 text-sm md:text-xl leading-relaxed mb-6 md:mb-8">
                                             {selectedCompany.description}
                                         </p>
                                     </div>
 
                                     <div className="flex flex-col gap-4">
-                                        <a href={selectedCompany.linksite} target="_blank" className="flex items-center justify-center gap-2 group p-4 rounded-xl bg-white text-black font-bold transition-all hover:bg-purple-500 hover:text-white">
+                                        <a href={selectedCompany.linksite} target="_blank" className="flex items-center justify-center gap-2 group p-3 md:p-4 rounded-xl bg-white text-black font-bold text-sm md:text-base transition-all hover:bg-purple-500 hover:text-white">
                                             Visitar Site <ExternalLink size={18} />
                                         </a>
                                     </div>
                                 </div>
 
                                 {/* Images Side */}
-                                <div className="relative p-6 md:p-12 md:pl-0 flex items-center justify-center">
+                                <div className="relative p-4 md:p-12 md:pl-0 flex items-center justify-center order-1 md:order-2">
                                     <ImageGallery images={selectedCompany.images} name={selectedCompany.name} />
                                 </div>
                             </div>
@@ -309,6 +333,16 @@ export function TrustedBy() {
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            <style>{`
+                .invisible-scrollbar::-webkit-scrollbar {
+                    display: none;
+                }
+                .invisible-scrollbar {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+            `}</style>
         </section>
     );
 }
