@@ -55,7 +55,7 @@ export function LevantaPerks() {
     return (
         <section
             id="perks"
-            className="w-full h-screen relative snap-start border-t border-white/5 overflow-hidden snap-proximity scroll-smooth"
+            className="w-full min-h-screen relative snap-start border-t border-white/5 snap-proximity scroll-smooth py-20 md:py-0 md:h-screen flex items-center"
         >
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none z-0" />
 
@@ -71,7 +71,7 @@ export function LevantaPerks() {
 
             {/* Container principal */}
             <div className="relative h-full w-full flex items-center z-[3]">
-                <div className="w-full max-w-7xl mx-auto px-8 md:px-20 flex items-center justify-between">
+                <div className="w-full max-w-7xl mx-auto px-4 md:px-20 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0">
 
 
                     {/* Lado Esquerdo: Conteúdo de Texto - OTIMIZADO */}
@@ -82,7 +82,7 @@ export function LevantaPerks() {
                             variants={textVariants}
                             transition={{ duration: 0.6 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-pink-500 mb-6 leading-tight"
+                            className="text-3xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-pink-500 mb-4 md:mb-6 leading-tight"
                         >
                             O Que Você Ganha
                         </motion.h2>
@@ -94,7 +94,7 @@ export function LevantaPerks() {
                             variants={textVariants}
                             transition={{ duration: 0.6, delay: 0.1 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-xl"
+                            className="text-sm md:text-xl text-gray-300 leading-relaxed max-w-xl mb-4 md:mb-0"
                         >
                             Soluções web personalizadas que colocam você à frente da concorrência com tecnologia de ponta.
                         </motion.p>
@@ -106,7 +106,7 @@ export function LevantaPerks() {
                             variants={textVariants}
                             transition={{ duration: 0.6, delay: 0.2 }}
                             viewport={{ once: true, margin: "-100px" }}
-                            className="mt-4 text-sm md:text-base text-gray-400 max-w-lg"
+                            className="mt-4 text-xs md:text-base text-gray-400 max-w-lg"
                         >
                             Cada projeto é único, desenvolvido do zero para atender suas necessidades específicas,
                             sem templates prontos ou plugins desnecessários.

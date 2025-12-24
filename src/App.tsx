@@ -15,7 +15,7 @@ import { Intermed } from './components/home/Intermed';
 function App() {
   return (
     <HeroProvider>
-      <div className="bg-[#05050A] text-white font-['Satoshi'] selection:bg-purple-500 selection:text-white h-screen w-full snap-container overflow-y-scroll snap-y snap-mandatory scroll-smooth relative">
+      <div className="bg-[#05050A] text-white font-['Satoshi'] selection:bg-purple-500 selection:text-white h-screen w-full snap-container overflow-y-scroll overflow-x-hidden snap-y snap-mandatory scroll-smooth relative">
 
         <FloatingDock />
 

@@ -1,6 +1,6 @@
 export function Intermed() {
     return (
-        <section className="snap-start snap-proximity scroll-smooth w-full h-[25vh] bg-[#05050A] relative border-b border-white/5 overflow-visible">
+        <section className="hidden md:block snap-start snap-proximity scroll-smooth w-full h-[25vh] bg-[#05050A] relative border-b border-white/5 overflow-visible">
             {/* Background Effects matching PlatformIntro */}
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />

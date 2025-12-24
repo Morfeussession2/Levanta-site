@@ -125,7 +125,7 @@ export function AdaptiveSection() {
     return (
         <section
             id="servicos"
-            className="w-full h-screen bg-[#05050A] relative snap-start border-t border-white/5 overflow-hidden"
+            className="w-full min-h-screen bg-[#05050A] relative snap-start border-t border-white/5 py-20 md:py-0 md:h-screen md:overflow-hidden"
         >
             <style>{`
         .invisible-scrollbar {
@@ -158,75 +158,164 @@ export function AdaptiveSection() {
                 </>
             )}
 
-            {/* Container scrollável */}
-            <div
-                ref={scrollContainerRef}
-                className={`invisible-scrollbar absolute inset-0 overflow-y-auto overflow-x-hidden ${lowPower ? "reduce-motion" : ""
-                    }`}
-            >
-                <div className="flex flex-col md:flex-row">
-                    {/* Lado Esquerdo: Cards */}
-                    <div className="w-full md:w-1/2 relative">
-                        <div className="relative z-10 py-10 px-4">
-                            {services.map((service, index) => {
-                                const targetScale = 1 - (services.length - index) * 0.05;
-                                const range = [index * 0.25, (index + 1) * 0.25];
-
-                                return (
-                                    <ServiceCard
-                                        key={service.title}
-                                        service={service}
-                                        index={index}
-                                        progress={scrollYProgress}
-                                        range={range}
-                                        targetScale={targetScale}
-                                        lowPower={lowPower}
-                                    />
-                                );
-                            })}
-                        </div>
-                    </div>
-
-                    {/* Espaçador do lado direito */}
-                    <div className="w-full md:w-1/2" style={{ height: `${services.length * 70}vh` }} />
-                </div>
-            </div>
-
-            {/* Lado Direito: Texto fixo (reduzido no modo leve) */}
-            <div className="absolute top-0 right-0 w-full md:w-1/2 h-full flex items-center justify-center p-8 md:p-20 z-20 pointer-events-none">
-                <div className="max-w-xl pointer-events-auto">
+            {/* Mobile Layout - Text First, Cards Below */}
+            <div className="md:hidden relative z-10 px-4 mt-20">
+                {/* Texto no topo (mobile) */}
+                <div className="mb-8">
                     <motion.h2
-                        initial={lowPower ? { opacity: 1, x: 0 } : { x: 60, opacity: 0 }}
+                        initial={lowPower ? { opacity: 1, x: 0 } : { x: -60, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
                         transition={lowPower ? { duration: 0 } : { duration: 0.5 }}
                         viewport={{ once: true }}
-                        className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-pink-500 mb-6 leading-tight"
+                        className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-pink-500 mb-4 leading-tight"
                     >
                         Nossos Serviços
                     </motion.h2>
 
                     <motion.p
-                        initial={lowPower ? { opacity: 1, x: 0 } : { x: 60, opacity: 0 }}
+                        initial={lowPower ? { opacity: 1, x: 0 } : { x: -60, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
                         transition={lowPower ? { duration: 0 } : { duration: 0.5, delay: 0.08 }}
                         viewport={{ once: true }}
-                        className="text-lg md:text-xl text-gray-300 leading-relaxed"
+                        className="text-sm text-gray-300 leading-relaxed mb-3"
                     >
                         Oferecemos soluções completas em tecnologia para empresas que buscam inovação e
                         crescimento sustentável.
                     </motion.p>
 
                     <motion.p
-                        initial={lowPower ? { opacity: 1, x: 0 } : { x: 60, opacity: 0 }}
+                        initial={lowPower ? { opacity: 1, x: 0 } : { x: -60, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
                         transition={lowPower ? { duration: 0 } : { duration: 0.5, delay: 0.16 }}
                         viewport={{ once: true }}
-                        className="mt-4 text-sm md:text-base text-gray-400 max-w-lg"
+                        className="text-xs text-gray-400"
                     >
                         Da criação de interfaces modernas ao desenvolvimento contínuo e manutenção de sistemas,
                         a Levanta cuida de toda a jornada digital da sua empresa com foco em performance,
                         experiência do usuário e escalabilidade.
                     </motion.p>
+                </div>
+
+                {/* Cards abaixo (mobile) - Horizontal Scroll com Drag */}
+                <div className="relative -mx-4">
+                    <motion.div
+                        className="flex gap-4 px-4 cursor-grab active:cursor-grabbing"
+                        drag="x"
+                        dragConstraints={{ left: -((services.length - 1) * 320), right: 0 }}
+                        dragElastic={0.1}
+                        dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+                    >
+                        {services.map((service, index) => (
+                            <motion.div
+                                key={service.title}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                viewport={{ once: true }}
+                                className="group relative flex-shrink-0 w-[300px] h-auto overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-5 shadow-xl"
+                            >
+                                <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-60" />
+
+                                <div className="flex items-start gap-3">
+                                    <div className="flex-1">
+                                        <h3 className="text-lg font-bold text-white tracking-wide">
+                                            {service.title}
+                                        </h3>
+                                        <p className="mt-2 text-sm text-gray-200 leading-relaxed">
+                                            {service.description}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <ul className="mt-4 space-y-2 text-sm text-gray-200">
+                                    {service.items.map((item) => (
+                                        <li key={item} className="flex items-center gap-2 text-gray-200">
+                                            <span className="h-1.5 w-1.5 rounded-full bg-purple-400 flex-shrink-0" />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+
+                    {/* Scroll Indicator */}
+
+                </div>
+            </div>
+
+            {/* Desktop Layout - Original Scroll Effect */}
+            <div className="hidden md:block">
+                {/* Container scrollável */}
+                <div
+                    ref={scrollContainerRef}
+                    className={`invisible-scrollbar absolute inset-0 overflow-y-auto ${lowPower ? "reduce-motion" : ""
+                        }`}
+                >
+                    <div className="flex flex-col md:flex-row">
+                        {/* Lado Esquerdo: Cards */}
+                        <div className="w-full md:w-1/2 relative">
+                            <div className="relative z-10 py-10 px-4">
+                                {services.map((service, index) => {
+                                    const targetScale = 1 - (services.length - index) * 0.05;
+                                    const range = [index * 0.25, (index + 1) * 0.25];
+
+                                    return (
+                                        <ServiceCard
+                                            key={service.title}
+                                            service={service}
+                                            index={index}
+                                            progress={scrollYProgress}
+                                            range={range}
+                                            targetScale={targetScale}
+                                            lowPower={lowPower}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        {/* Espaçador do lado direito */}
+                        <div className="w-full md:w-1/2" style={{ height: `${services.length * 70}vh` }} />
+                    </div>
+                </div>
+
+                {/* Lado Direito: Texto fixo (reduzido no modo leve) */}
+                <div className="absolute top-0 right-0 w-full md:w-1/2 h-full flex items-center justify-center p-8 md:p-20 z-20 pointer-events-none">
+                    <div className="max-w-xl pointer-events-auto">
+                        <motion.h2
+                            initial={lowPower ? { opacity: 1, x: 0 } : { x: 60, opacity: 0 }}
+                            whileInView={{ x: 0, opacity: 1 }}
+                            transition={lowPower ? { duration: 0 } : { duration: 0.5 }}
+                            viewport={{ once: true }}
+                            className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-pink-500 mb-6 leading-tight"
+                        >
+                            Nossos Serviços
+                        </motion.h2>
+
+                        <motion.p
+                            initial={lowPower ? { opacity: 1, x: 0 } : { x: 60, opacity: 0 }}
+                            whileInView={{ x: 0, opacity: 1 }}
+                            transition={lowPower ? { duration: 0 } : { duration: 0.5, delay: 0.08 }}
+                            viewport={{ once: true }}
+                            className="text-lg md:text-xl text-gray-300 leading-relaxed"
+                        >
+                            Oferecemos soluções completas em tecnologia para empresas que buscam inovação e
+                            crescimento sustentável.
+                        </motion.p>
+
+                        <motion.p
+                            initial={lowPower ? { opacity: 1, x: 0 } : { x: 60, opacity: 0 }}
+                            whileInView={{ x: 0, opacity: 1 }}
+                            transition={lowPower ? { duration: 0 } : { duration: 0.5, delay: 0.16 }}
+                            viewport={{ once: true }}
+                            className="mt-4 text-sm md:text-base text-gray-400 max-w-lg"
+                        >
+                            Da criação de interfaces modernas ao desenvolvimento contínuo e manutenção de sistemas,
+                            a Levanta cuida de toda a jornada digital da sua empresa com foco em performance,
+                            experiência do usuário e escalabilidade.
+                        </motion.p>
+                    </div>
                 </div>
             </div>
         </section>

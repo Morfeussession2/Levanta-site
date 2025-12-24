@@ -119,7 +119,7 @@ export function LiveTest() {
     return (
         <section
             id="test"
-            className="w-full h-screen bg-[#05050A] flex flex-col items-center justify-center relative snap-start border-t border-white/5 overflow-hidden py-12"
+            className="w-full min-h-screen bg-[#05050A] flex flex-col items-center justify-center relative snap-start border-t border-white/5 py-12 md:py-12 md:h-screen"
         >
             {/* Background Effects */}
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none z-0" />
@@ -145,12 +145,12 @@ export function LiveTest() {
                 initial={{ y: 20, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8 }}
-                className="text-center mb-0 z-10"
+                className="text-center mb-8 md:mb-0 z-10"
             >
-                <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent">
+                <h2 className="text-3xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 bg-clip-text text-transparent">
                     Teste você mesmo!
                 </h2>
-                <p className="text-slate-400 mt-0 text-lg">
+                <p className="text-slate-400 mt-0 text-sm md:text-lg">
                     Experimente editar em tempo real
                 </p>
             </motion.div>
@@ -159,19 +159,19 @@ export function LiveTest() {
             {/* Editor Container */}
             <div className="relative z-10 w-full flex-1 max-w-[1800px] mx-auto px-4 lg:px-6 flex flex-col overflow-hidden">
                 {/* Header */}
-                <div className="flex items-center justify-between mb-6 shrink-0">
-                    <div className="flex items-center gap-4">
-                        <button className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-white/10 transition-colors">
-                            <ArrowLeft className="h-5 w-5 text-slate-400" />
+                <div className="flex items-center justify-between mb-4 md:mb-6 shrink-0">
+                    <div className="flex items-center gap-2 md:gap-4">
+                        <button className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full hover:bg-white/10 transition-colors">
+                            <ArrowLeft className="h-4 w-4 md:h-5 md:w-5 text-slate-400" />
                         </button>
                         <div>
                             <div className="flex items-center gap-2">
-                                <h1 className="text-2xl font-bold text-white">Home</h1>
-                                <span className="inline-flex items-center rounded-full bg-slate-800 border border-slate-700 px-2.5 py-0.5 text-xs font-normal text-slate-300">
+                                <h1 className="text-lg md:text-2xl font-bold text-white">Home</h1>
+                                <span className="inline-flex items-center rounded-full bg-slate-800 border border-slate-700 px-2 py-0.5 text-xs font-normal text-slate-300">
                                     {sections.length} seções
                                 </span>
                             </div>
-                            <p className="text-sm text-slate-400">
+                            <p className="text-xs md:text-sm text-slate-400">
                                 Editando conteúdo da página
                             </p>
                         </div>
@@ -182,19 +182,19 @@ export function LiveTest() {
                         <a
                             href="#home"
                             onClick={handleSave}
-                            className={`inline-flex h-10 items-center gap-2 rounded-md border px-4 text-sm font-medium transition-all cursor-pointer ${hasChanges
+                            className={`inline-flex h-10 items-center gap-2 rounded-md border px-3 md:px-4 text-sm font-medium transition-all cursor-pointer ${hasChanges
                                 ? "border-green-500/30 bg-green-500/10 text-green-400 hover:bg-green-500/20 hover:scale-105"
                                 : "border-slate-700 bg-slate-800 text-slate-500 cursor-not-allowed opacity-50 pointer-events-none"
                                 }`}
                         >
                             <Save className="h-4 w-4" />
-                            Salvar
+                            <span className="hidden sm:inline">Salvar</span>
                         </a>
-                        <button className="inline-flex h-10 items-center gap-2 rounded-md border border-blue-500/30 bg-blue-500/10 px-4 text-sm font-medium text-blue-400 hover:bg-blue-500/20 transition-colors">
+                        <button className="hidden md:inline-flex h-10 items-center gap-2 rounded-md border border-blue-500/30 bg-blue-500/10 px-4 text-sm font-medium text-blue-400 hover:bg-blue-500/20 transition-colors">
                             <Eye className="h-4 w-4" />
                             Pré-visualizar
                         </button>
-                        <button className="inline-flex h-10 items-center gap-2 rounded-md bg-purple-600 px-4 text-sm font-medium text-white hover:bg-purple-500 transition-colors">
+                        <button className="hidden md:inline-flex h-10 items-center gap-2 rounded-md bg-purple-600 px-4 text-sm font-medium text-white hover:bg-purple-500 transition-colors">
                             <Plus className="h-4 w-4" />
                             Nova Seção
                         </button>
@@ -205,26 +205,26 @@ export function LiveTest() {
                 {/* Main Content */}
                 <div className="relative flex flex-1 gap-6 overflow-hidden">
                     {/* Sidebar Navigation */}
-                    <div className="group/sidebar absolute bottom-0 left-0 top-0 z-20 flex w-16 hover:w-72 flex-col rounded-xl border border-white/10 bg-slate-900/90 backdrop-blur-xl shadow-2xl transition-all duration-300 overflow-hidden">
+                    <div className="group/sidebar absolute bottom-0 left-0 top-0 z-20 flex w-12 md:w-16 hover:w-64 md:hover:w-72 flex-col rounded-xl border border-white/10 bg-slate-900/90 backdrop-blur-xl shadow-2xl transition-all duration-300 overflow-hidden">
                         <div className="flex items-center gap-3 border-b border-white/10 bg-slate-800/50 p-4">
-                            <Menu className="h-5 w-5 text-slate-400 shrink-0" />
-                            <span className="font-semibold text-slate-200 opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                            <Menu className="h-4 w-4 md:h-5 md:w-5 text-slate-400 shrink-0" />
+                            <span className="text-sm font-semibold text-slate-200 opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 whitespace-nowrap">
                                 Navegação
                             </span>
                         </div>
 
 
-                        <div className="flex-1 overflow-hidden p-2">
+                        <div className="flex-1 overflow-hidden p-1 md:p-2">
                             {sections.map((section, idx) => (
                                 <div
                                     key={section.id}
-                                    className={`group/item relative flex items-center gap-3 rounded-lg p-2 cursor-pointer transition-colors ${section.active
+                                    className={`group/item relative flex items-center justify-content: space-evenly; md:justify-start gap-3 rounded-lg p-2 md:p-2 cursor-pointer transition-colors ${section.active
                                         ? "bg-blue-500/20 text-blue-400"
                                         : "text-slate-400 hover:bg-white/5"
                                         } ${idx > 0 ? "mt-1" : ""}`}
                                 >
                                     <div
-                                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-xs font-bold ${section.active ? "bg-blue-500/30" : "bg-slate-700"
+                                        className={`flex h-6 w-6 md:h-8 md:w-8 shrink-0 items-center justify-center rounded-md text-[9px] md:text-xs font-bold ${section.active ? "bg-blue-500/30" : "bg-slate-700"
                                             }`}
                                     >
                                         {section.id}
@@ -247,7 +247,7 @@ export function LiveTest() {
 
 
                     {/* Editor Panel */}
-                    <div className="ml-24 flex-1 flex flex-col overflow-hidden relative">
+                    <div className="ml-14 md:ml-24 flex-1 flex flex-col overflow-hidden relative">
                         {/* Overlay central do aviso */}
                         <AnimatePresence>
                             {hasChanges && (
@@ -265,22 +265,22 @@ export function LiveTest() {
 
                         <div className="flex h-full flex-col rounded-lg">
                             {/* Section Header */}
-                            <div className="flex items-center justify-between px-1 mb-4 shrink-0">
+                            <div className="flex items-center justify-between px-1 mb-3 md:mb-4 shrink-0">
                                 <div className="flex items-center gap-2">
-                                    <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-2.5 py-0.5 text-xs font-semibold text-white">
+                                    <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-2 py-0.5 text-xs font-semibold text-white">
                                         Seção 1
                                     </span>
-                                    <span className="text-sm text-slate-400">ID: hero</span>
+                                    <span className="text-xs md:text-sm text-slate-400">ID: hero</span>
                                 </div>
                                 <div className="flex gap-2">
                                     <button
                                         disabled
-                                        className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/10 bg-white/5 opacity-50"
+                                        className="inline-flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-md border border-white/10 bg-white/5 opacity-50"
                                     >
-                                        <ChevronLeft className="h-4 w-4 text-white" />
+                                        <ChevronLeft className="h-3 w-3 md:h-4 md:w-4 text-white" />
                                     </button>
-                                    <button className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
-                                        <ChevronRight className="h-4 w-4 text-white" />
+                                    <button className="inline-flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-md border border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+                                        <ChevronRight className="h-3 w-3 md:h-4 md:w-4 text-white" />
                                     </button>
                                 </div>
                             </div>
@@ -374,21 +374,21 @@ export function LiveTest() {
 
                                     {/* Structure Card */}
                                     <div className="rounded-lg border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
-                                        <div className="flex flex-col border-b border-white/10 bg-white/5 px-6 py-4">
+                                        <div className="flex flex-col border-b border-white/10 bg-white/5 px-3 md:px-6 py-2.5 md:py-4">
                                             <div className="flex items-center gap-2">
-                                                <Type className="h-5 w-5 text-blue-400" />
-                                                <h3 className="text-base font-semibold text-white">
+                                                <Type className="h-4 w-4 md:h-5 md:w-5 text-blue-400" />
+                                                <h3 className="text-xs md:text-base font-semibold text-white">
                                                     Estrutura da Seção
                                                 </h3>
                                             </div>
-                                            <p className="text-sm text-slate-400 mt-1.5">
+                                            <p className="text-[10px] md:text-sm text-slate-400 mt-1">
                                                 Defina quais elementos estarão visíveis nesta seção
                                             </p>
                                         </div>
 
 
-                                        <div className="p-6">
-                                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                        <div className="p-4 md:p-6">
+                                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
                                                 {elementOptions.map((option) => {
                                                     const Icon = option.icon;
                                                     const isActive = elements[option.key];
@@ -399,7 +399,7 @@ export function LiveTest() {
                                                         <div
                                                             key={option.key}
                                                             onClick={() => !isLocked && toggleElement(option.key)}
-                                                            className={`flex flex-col gap-3 rounded-xl border p-3 shadow-sm transition-all ${isLocked
+                                                            className={`flex flex-col gap-2 md:gap-3 rounded-xl border p-2.5 md:p-3 shadow-sm transition-all ${isLocked
                                                                 ? "border-slate-600 bg-slate-800/50 cursor-not-allowed opacity-60"
                                                                 : isActive
                                                                     ? "border-blue-400/50 bg-blue-500/10 cursor-pointer"
@@ -428,7 +428,7 @@ export function LiveTest() {
                                                                     </button>
                                                                 )}
                                                             </div>
-                                                            <label className="text-sm font-medium text-slate-200">
+                                                            <label className="text-xs md:text-sm font-medium text-slate-200">
                                                                 {option.label}
                                                             </label>
                                                         </div>
@@ -443,11 +443,11 @@ export function LiveTest() {
                                     <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-md shadow-xl">
                                         <button
                                             onClick={() => setContentExpanded(!contentExpanded)}
-                                            className="flex w-full items-center justify-between p-4 font-medium"
+                                            className="flex w-full items-center justify-between p-2.5 md:p-4 font-medium"
                                         >
                                             <div className="flex items-center gap-2 text-white">
                                                 <Type className="h-4 w-4 text-blue-400" />
-                                                <span className="font-semibold">Conteúdo de Texto</span>
+                                                <span className="text-xs md:text-base font-semibold">Conteúdo de Texto</span>
                                             </div>
                                             <ChevronRight
                                                 className={`h-4 w-4 text-slate-400 transition-transform ${contentExpanded ? "rotate-90" : ""
@@ -462,7 +462,7 @@ export function LiveTest() {
                                                 {elements.hasTitle && (
                                                     <div>
                                                         <div className="flex items-center justify-between mb-2">
-                                                            <label className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                                                            <label className="text-[9px] md:text-xs font-semibold uppercase tracking-wide text-slate-400">
                                                                 Título Principal
                                                             </label>
                                                             <div className="flex items-center gap-1 text-xs text-slate-500">
@@ -474,7 +474,7 @@ export function LiveTest() {
                                                             type="text"
                                                             value="LEVANTA"
                                                             disabled
-                                                            className="mt-2 flex h-10 w-full rounded-md border border-slate-700 bg-slate-800/50 px-3 py-2 text-lg font-medium text-slate-500 cursor-not-allowed"
+                                                            className="mt-1 flex h-8 md:h-10 w-full rounded-md border border-slate-700 bg-slate-800/50 px-2 md:px-3 py-2 text-sm md:text-lg font-medium text-slate-500 cursor-not-allowed"
                                                         />
                                                     </div>
                                                 )}
@@ -483,7 +483,7 @@ export function LiveTest() {
                                                 {/* Editable Subtitle */}
                                                 {elements.hasSubtitle && (
                                                     <div>
-                                                        <label className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                                                        <label className="text-[9px] md:text-xs font-semibold uppercase tracking-wide text-slate-400">
                                                             Subtítulo
                                                         </label>
                                                         <input
@@ -492,7 +492,7 @@ export function LiveTest() {
                                                             onChange={(e) =>
                                                                 handleTextChange(e.target.value, setSubtitle)
                                                             }
-                                                            className="mt-2 flex h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
+                                                            className="mt-1 flex h-8 md:h-10 w-full rounded-md border border-white/10 bg-white/5 px-2 md:px-3 py-2 text-xs md:text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
                                                             placeholder="Digite o subtítulo..."
                                                         />
                                                     </div>
@@ -502,7 +502,7 @@ export function LiveTest() {
                                                 {/* Editable Description */}
                                                 {elements.hasDescription && (
                                                     <div>
-                                                        <label className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                                                        <label className="text-[9px] md:text-xs font-semibold uppercase tracking-wide text-slate-400">
                                                             Descrição
                                                         </label>
                                                         <textarea
@@ -510,8 +510,8 @@ export function LiveTest() {
                                                             onChange={(e) =>
                                                                 handleTextChange(e.target.value, setDescription)
                                                             }
-                                                            rows={3}
-                                                            className="mt-2 flex min-h-20 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all resize-none"
+                                                            rows={2}
+                                                            className="mt-1 flex min-h-16 md:min-h-20 w-full rounded-md border border-white/10 bg-white/5 px-2 md:px-3 py-1.5 md:py-2 text-[10px] md:text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all resize-none"
                                                             placeholder="Digite a descrição..."
                                                         />
                                                     </div>

@@ -178,7 +178,7 @@ export function TrustedBy() {
     const displayCompanies = [...companies, ...companies, ...companies];
 
     return (
-        <section id="cases" className="w-full h-screen bg-[#05050A] flex flex-col items-center justify-center relative overflow-hidden snap-start border-t border-white/5">
+        <section id="cases" className="w-full min-h-screen bg-[#05050A] flex flex-col items-center justify-center relative snap-start border-t border-white/5 py-20 md:py-0 md:h-screen">
             {/* Background effects */}
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none z-0" />
 
@@ -190,66 +190,68 @@ export function TrustedBy() {
 
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-900/5 via-black to-black opacity-50 pointer-events-none" />
 
-            <div className="max-w-7xl mx-auto px-6 relative z-10 mb-16 text-center w-full">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <h2 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-pink-500 mb-6">
-                        Empresas que confiam
-                    </h2>
-                    <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
-                        Parcerias estratégicas que impulsionam a inovação e o crescimento digital.
-                    </p>
-                </motion.div>
-            </div>
+            <div className="w-full flex flex-col items-center justify-center flex-1">
+                <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10 mb-12 md:mb-16 text-center w-full">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <h2 className="text-3xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-pink-500 mb-4 md:mb-6">
+                            Empresas que confiam
+                        </h2>
+                        <p className="text-gray-400 text-sm md:text-xl max-w-2xl mx-auto">
+                            Parcerias estratégicas que impulsionam a inovação e o crescimento digital.
+                        </p>
+                    </motion.div>
+                </div>
 
-            {/* Carousel Container */}
-            <div
-                className="relative flex items-center overflow-hidden"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-            >
-                {/* Gradient Masks */}
-                <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-black to-transparent z-20" />
-                <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-black to-transparent z-20" />
-
-                <motion.div
-                    className="flex gap-12 whitespace-nowrap py-10"
-                    animate={{
-                        x: [0, "-33.33%"],
-                    }}
-                    transition={{
-                        x: {
-                            repeat: Infinity,
-                            repeatType: "loop",
-                            duration: isHovered ? 60 : 25,
-                            ease: "linear",
-                        },
-                    }}
+                {/* Carousel Container */}
+                <div
+                    className="relative flex items-center overflow-hidden"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
                 >
-                    {displayCompanies.map((company, index) => (
-                        <motion.div
-                            key={`${company.id}-${index}`}
-                            className="flex-shrink-0 cursor-pointer"
-                            whileHover={{ scale: 1.05 }}
-                            onClick={() => setSelectedCompany(company)}
-                        >
-                            <div className={`relative group p-5 rounded-2xl border border-white/10 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10 flex flex-col items-center justify-center ${company.cardBg || 'bg-white/5'}`}>
-                                <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl" />
-                                <img
-                                    src={company.logo}
-                                    alt={company.name}
-                                    className={`${company.logoHeight || 'h-16 md:h-24'} w-auto grayscale group-hover:grayscale-0 transition-all duration-500 object-contain brightness-200`}
-                                />
-                                {/* <div className="mt-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    {/* Gradient Masks */}
+                    <div className="absolute inset-y-0 left-0 w-20 md:w-40 bg-gradient-to-r from-black to-transparent z-20" />
+                    <div className="absolute inset-y-0 right-0 w-20 md:w-40 bg-gradient-to-l from-black to-transparent z-20" />
+
+                    <motion.div
+                        className="flex gap-6 md:gap-12 whitespace-nowrap py-6 md:py-10"
+                        animate={{
+                            x: [0, "-33.33%"],
+                        }}
+                        transition={{
+                            x: {
+                                repeat: Infinity,
+                                repeatType: "loop",
+                                duration: isHovered ? 60 : 25,
+                                ease: "linear",
+                            },
+                        }}
+                    >
+                        {displayCompanies.map((company, index) => (
+                            <motion.div
+                                key={`${company.id}-${index}`}
+                                className="flex-shrink-0 cursor-pointer"
+                                whileHover={{ scale: 1.05 }}
+                                onClick={() => setSelectedCompany(company)}
+                            >
+                                <div className={`relative group p-3 md:p-5 rounded-xl md:rounded-2xl border border-white/10 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10 flex flex-col items-center justify-center ${company.cardBg || 'bg-white/5'}`}>
+                                    <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl" />
+                                    <img
+                                        src={company.logo}
+                                        alt={company.name}
+                                        className={`${company.logoHeight || 'h-12 md:h-24'} w-auto grayscale group-hover:grayscale-0 transition-all duration-500 object-contain brightness-200`}
+                                    />
+                                    {/* <div className="mt-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                                     <span className="text-xs font-mono uppercase tracking-widest text-purple-400">Ver Case</span>
                                 </div> */}
-                            </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </div>
             </div>
 
             {/* Modal */}
