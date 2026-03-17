@@ -203,9 +203,9 @@ export function LiveTest() {
 
 
                 {/* Main Content */}
-                <div className="relative flex flex-1 gap-6 overflow-hidden">
+                <div className="relative flex flex-1 gap-4 md:gap-6 overflow-hidden">
                     {/* Sidebar Navigation */}
-                    <div className="group/sidebar absolute bottom-0 left-0 top-0 z-20 flex w-12 md:w-16 hover:w-64 md:hover:w-72 flex-col rounded-xl border border-white/10 bg-slate-900/90 backdrop-blur-xl shadow-2xl transition-all duration-300 overflow-hidden">
+                    <div className="group/sidebar absolute bottom-0 left-0 top-0 z-20 hidden md:flex w-12 md:w-16 hover:w-64 md:hover:w-72 flex-col rounded-xl border border-white/10 bg-slate-900/90 backdrop-blur-xl shadow-2xl transition-all duration-300 overflow-hidden">
                         <div className="flex items-center justify-center md:justify-start gap-3 border-b border-white/10 bg-slate-800/50 p-3 md:p-4">
                             <Menu className="h-4 w-4 md:h-5 md:w-5 text-slate-400 shrink-0" />
                             <span className="text-sm font-semibold text-slate-200 opacity-0 group-hover/sidebar:opacity-100 transition-opacity duration-300 whitespace-nowrap">
@@ -247,7 +247,7 @@ export function LiveTest() {
 
 
                     {/* Editor Panel */}
-                    <div className="ml-14 md:ml-24 flex-1 flex flex-col overflow-hidden relative">
+                    <div className="ml-0 md:ml-24 flex-1 flex flex-col overflow-hidden relative">
                         {/* Overlay central do aviso */}
                         <AnimatePresence>
                             {hasChanges && (
@@ -311,7 +311,7 @@ export function LiveTest() {
                                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                                     exit={{ opacity: 0, scale: 0.9, y: 20 }}
                                                     transition={{ duration: 0.35, ease: "easeOut" }}
-                                                    className="absolute top-40 left-1/3 -translate-x-1/2 -translate-y-1/2 z-50 w-[90%] max-w-md"
+                                                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-[92%] max-w-md"
                                                 >
                                                     <div className="relative rounded-2xl border border-white/20 bg-slate-900/95 backdrop-blur-xl shadow-[0_0_60px_rgba(15,23,42,0.9)] px-6 py-5">
                                                         <h3 className="text-lg font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-pink-500 bg-clip-text text-transparent mb-4">
@@ -348,7 +348,7 @@ export function LiveTest() {
                                                         </div>
 
 
-                                                        <div className="flex items-center justify-between gap-3 pt-4 border-t border-white/10">
+                                                        <div className="flex flex-col items-start justify-between gap-3 pt-4 border-t border-white/10 sm:flex-row sm:items-center">
                                                             <label className="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
                                                                 <input
                                                                     type="checkbox"

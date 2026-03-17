@@ -227,7 +227,7 @@ export function TrustedBy() {
 
                 {/* Carousel Container */}
                 <div
-                    className="relative flex items-center overflow-hidden"
+                    className="relative flex w-full items-center overflow-hidden"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
@@ -236,7 +236,7 @@ export function TrustedBy() {
                     <div className="absolute inset-y-0 right-0 w-20 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
 
                     <motion.div
-                        className="flex gap-6 md:gap-12 whitespace-nowrap py-6 md:py-10 pointer-events-auto"
+                        className="flex gap-4 sm:gap-6 md:gap-12 whitespace-nowrap py-6 md:py-10 pointer-events-auto"
                         drag={isMobile ? "x" : false}
                         dragConstraints={{ left: -2000, right: 0 }}
                         dragElastic={0.05}
@@ -261,7 +261,7 @@ export function TrustedBy() {
                                 whileHover={{ scale: 1.05 }}
                                 onClick={() => setSelectedCompany(company)}
                             >
-                                <div className={`relative group p-3 md:p-5 rounded-xl md:rounded-2xl border border-white/10 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10 flex flex-col items-center justify-center ${company.cardBg || 'bg-white/5'}`}>
+                                <div className={`relative group p-3 md:p-5 rounded-xl md:rounded-2xl border border-white/10 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10 flex min-w-[120px] sm:min-w-[150px] flex-col items-center justify-center ${company.cardBg || 'bg-white/5'}`}>
                                     <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl" />
                                     <img
                                         src={company.logo}
@@ -292,7 +292,7 @@ export function TrustedBy() {
                             initial={{ scale: 0.9, opacity: 0, y: 20 }}
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                            className="relative w-full max-w-[1120px] max-h-[90vh] md:max-h-[85vh] bg-[#0A0A0F] border border-white/10 rounded-3xl overflow-hidden shadow-2xl overflow-y-auto invisible-scrollbar"
+                            className="relative w-full max-w-[1120px] max-h-[92vh] md:max-h-[85vh] bg-[#0A0A0F] border border-white/10 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl overflow-y-auto invisible-scrollbar"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <button
@@ -304,15 +304,15 @@ export function TrustedBy() {
 
                             <div className="grid grid-cols-1 md:grid-cols-2 h-full min-h-0 md:min-h-[500px]">
                                 {/* Info Side - Order 2 on mobile to show images first, or keep 1? User usually prefers text first. Sticking to text first. */}
-                                <div className="p-6 md:p-12 flex flex-col justify-between order-2 md:order-1">
+                                <div className="p-5 sm:p-6 md:p-12 flex flex-col justify-between order-2 md:order-1">
                                     <div>
                                         <div className={`inline-block px-3 py-1 rounded-full bg-gradient-to-r ${selectedCompany.color} text-[10px] md:text-xs font-bold uppercase mb-4 md:mb-6 tracking-widest`}>
                                             {selectedCompany.service}
                                         </div>
-                                        <h3 className="text-2xl md:text-5xl font-bold text-white mb-4 md:mb-6">
+                                        <h3 className="text-xl sm:text-2xl md:text-5xl font-bold text-white mb-4 md:mb-6">
                                             {selectedCompany.name}
                                         </h3>
-                                        <p className="text-gray-400 text-sm md:text-xl leading-relaxed mb-6 md:mb-8">
+                                        <p className="text-gray-400 text-xs sm:text-sm md:text-xl leading-relaxed mb-6 md:mb-8">
                                             {selectedCompany.description}
                                         </p>
                                     </div>

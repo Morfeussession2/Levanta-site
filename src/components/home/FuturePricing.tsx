@@ -150,7 +150,7 @@ export function FuturePricing() {
                 </div>
 
                 {/* Mobile Carousel */}
-                <div className="md:hidden relative w-full px-12">
+                <div className="md:hidden relative w-full px-10 sm:px-12">
                     <div className="relative overflow-visible">
                         <AnimatePresence mode="wait">
                             <motion.div
@@ -167,7 +167,7 @@ export function FuturePricing() {
                                         <div className="relative group max-w-sm mx-auto">
                                             <div className={`absolute inset-0 bg-gradient-to-br ${plan.color} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 rounded-2xl`}></div>
 
-                                            <div className={`relative p-6 rounded-xl border transition-all duration-300 flex flex-col
+                                            <div className={`relative p-5 sm:p-6 rounded-xl border transition-all duration-300 flex flex-col
                                                 ${plan.highlight
                                                     ? 'bg-white/10 border-green-500/50 shadow-[0_0_30px_rgba(34,197,94,0.3)]'
                                                     : 'bg-white/5 border-white/10'
@@ -179,9 +179,9 @@ export function FuturePricing() {
                                                     </div>
                                                 )}
 
-                                                <h3 className="text-2xl font-bold text-white mb-2 text-center">{plan.name}</h3>
+                                                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 text-center">{plan.name}</h3>
                                                 <div className="mb-6 text-center">
-                                                    <span className="text-4xl font-black text-white">{plan.price}</span>
+                                                    <span className="text-3xl sm:text-4xl font-black text-white">{plan.price}</span>
                                                     <span className="text-gray-400 text-sm">{plan.period}</span>
                                                 </div>
 
@@ -213,14 +213,14 @@ export function FuturePricing() {
                     {/* Navigation Arrows */}
                     <button
                         onClick={prevSlide}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-full p-2 transition-all duration-300 z-10"
+                        className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-full p-1.5 sm:p-2 transition-all duration-300 z-10"
                         aria-label="Previous plan"
                     >
                         <ChevronLeft className="w-5 h-5 text-white" />
                     </button>
                     <button
                         onClick={nextSlide}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-full p-2 transition-all duration-300 z-10"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-full p-1.5 sm:p-2 transition-all duration-300 z-10"
                         aria-label="Next plan"
                     >
                         <ChevronRight className="w-5 h-5 text-white" />

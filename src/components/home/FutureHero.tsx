@@ -61,14 +61,14 @@ export function FutureHero() {
     return (
         <section
             id="home"
-            className="w-full h-screen bg-black flex items-center justify-center relative overflow-hidden snap-start"
+            className="w-full min-h-screen bg-black flex items-center justify-center relative overflow-hidden snap-start py-16 md:h-screen md:py-0"
         >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-black to-black opacity-50" />
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/30 rounded-full blur-[128px] animate-pulse" />
             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[128px]" />
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
 
-            <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+            <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -84,18 +84,18 @@ export function FutureHero() {
                     initial={{ y: 50, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="mb-8 flex justify-center"
+                    className="mb-6 md:mb-8 flex justify-center"
                 >
                     <img
                         src="/LEVANTA LOGObranco-01.png"
                         alt="LEVANTA"
-                        className="w-full max-w-2xl h-auto object-contain"
+                        className="w-full max-w-[280px] sm:max-w-md md:max-w-2xl h-auto object-contain"
                     />
                 </motion.div>
 
                 <div className="max-w-3xl mx-auto flex flex-col items-center">
                     {/* SUBTÍTULO – bloco próprio, altura mínima + alinhamento central */}
-                    <div className="min-h-[3rem] md:min-h-[3.0rem] flex items-center justify-center text-xl md:text-3xl text-gray-300 font-light">
+                    <div className="min-h-[3.5rem] md:min-h-[3.0rem] flex items-center justify-center text-lg sm:text-xl md:text-3xl text-gray-300 font-light leading-snug">
                         <div className="inline-block">
                             {subtitleLines.map((line, lineIndex) => (
                                 <div
@@ -139,10 +139,10 @@ export function FutureHero() {
                     </div>
 
                     {/* ESPAÇAMENTO OBRIGATÓRIO ENTRE SUBTÍTULO E DESCRIÇÃO */}
-                    <div className="h-4 md:h-6" />
+                    <div className="h-3 md:h-6" />
 
                     {/* DESCRIÇÃO – bloco próprio, sempre abaixo */}
-                    <div className="min-h-[3rem] md:min-h-[3.5rem] flex items-center justify-center text-base md:text-2xl text-white font-medium leading-relaxed">
+                    <div className="min-h-[4.5rem] md:min-h-[3.5rem] flex items-center justify-center text-sm sm:text-base md:text-2xl text-white font-medium leading-relaxed">
                         <div className="inline-block text-left md:text-center">
                             {descriptionLines.map((line, lineIndex) => (
                                 <div
